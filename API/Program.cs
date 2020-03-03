@@ -28,6 +28,7 @@ namespace API
                     var context = services.GetRequiredService<DataContext>();
                     //Roda o comando para criar a base, caso não exista
                     context.Database.Migrate();
+                    Seed.SeedData(context);
                 }
                 catch (Exception ex)
                 {
