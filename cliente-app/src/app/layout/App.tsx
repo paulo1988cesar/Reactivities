@@ -7,7 +7,7 @@ import { Route, withRouter, RouteComponentProps, Switch } from "react-router-dom
 import ActivityForm from "../../features/activities/form/ActivityForm";
 import HomePage from "../../features/home/HomePage";
 import ActivityDetails from "../../features/activities/details/ActivityDetails";
-import UserList from "../../features/users/List/UserList";
+import UserDashboard from "../../features/users/List/UserDashboard";
 import NotFound from './NotFound';
 import { ToastContainer } from 'react-toastify';
 
@@ -31,7 +31,7 @@ const App: React.FC<RouteComponentProps> = ({ location }) => {
                   path={["/createActivity", "/manage/:id"]}
                   component={ActivityForm}
                 />
-                <Route path="/users" component={UserList} />
+                <Route path="/users" component={UserDashboard} />
                 <Route component={NotFound} />
               </Switch>
             </Container>

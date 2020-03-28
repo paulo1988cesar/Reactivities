@@ -13,7 +13,7 @@ class ActivityStore {
     @observable loadingInitial = false;
     @observable submitting = false;
     @observable target = '';
-
+    
     @computed get activitiesByDate() {
         return this.groupActivitiesByDate(Array.from(this.activityRegistry.values()));
     }

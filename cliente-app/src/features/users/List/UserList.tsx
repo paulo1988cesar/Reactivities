@@ -1,71 +1,67 @@
-import React from 'react';
-import { Table, Checkbox, Button, Icon } from 'semantic-ui-react';
+import React, { Fragment, useContext, useEffect } from "react";
+import { Table, Checkbox, Button, Icon, Card, Image } from "semantic-ui-react";
+import { toast } from "react-toastify";
+import { observer } from "mobx-react-lite";
+import userStore from "../../../app/stores/userStore";
+import LoadingComponent from "../../../app/layout/LoadingComponent";
 
-const UserList = () => {
-    return (
-        <Table compact celled definition>
+const ativarDesativarUsuario = () => {
+  toast.success("Usuário desativado com sucesso.");
+};
+
+const UserList: React.FC = () => {
+  const usersStore = useContext(userStore);
+  const { userLists } = usersStore;
+
+  if (usersStore.loadingInitial)
+    return <LoadingComponent content="Loading data..." />;
+
+  return (
+    <Fragment>
+      <Table compact celled definition selectable>
         <Table.Header>
           <Table.Row>
             <Table.HeaderCell />
             <Table.HeaderCell>Name</Table.HeaderCell>
-            <Table.HeaderCell>Registration Date</Table.HeaderCell>
+            <Table.HeaderCell>UserName</Table.HeaderCell>
             <Table.HeaderCell>E-mail address</Table.HeaderCell>
-            <Table.HeaderCell>Premium Plan</Table.HeaderCell>
+            <Table.HeaderCell>Active</Table.HeaderCell>
           </Table.Row>
         </Table.Header>
-    
+
         <Table.Body>
-          <Table.Row>
-            <Table.Cell collapsing>
-              <Checkbox slider />
-            </Table.Cell>
-            <Table.Cell>John Lilki</Table.Cell>
-            <Table.Cell>September 14, 2013</Table.Cell>
-            <Table.Cell>jhlilk22@yahoo.com</Table.Cell>
-            <Table.Cell>No</Table.Cell>
-          </Table.Row>
-          <Table.Row>
-            <Table.Cell collapsing>
-              <Checkbox slider />
-            </Table.Cell>
-            <Table.Cell>Jamie Harington</Table.Cell>
-            <Table.Cell>January 11, 2014</Table.Cell>
-            <Table.Cell>jamieharingonton@yahoo.com</Table.Cell>
-            <Table.Cell>Yes</Table.Cell>
-          </Table.Row>
-          <Table.Row>
-            <Table.Cell collapsing>
-              <Checkbox slider />
-            </Table.Cell>
-            <Table.Cell>Jill Lewis</Table.Cell>
-            <Table.Cell>May 11, 2014</Table.Cell>
-            <Table.Cell>jilsewris22@yahoo.com</Table.Cell>
-            <Table.Cell>Yes</Table.Cell>
-          </Table.Row>
+          {userLists.map(user => (
+            <Table.Row key={user.id}>
+              <Table.Cell collapsing>
+                <Checkbox slider onClick={ativarDesativarUsuario} />
+              </Table.Cell>
+              <Table.Cell>{user.displayName}</Table.Cell>
+              <Table.Cell>{user.username}</Table.Cell>
+              <Table.Cell>{user.email}</Table.Cell>
+              <Table.Cell>{user.status}</Table.Cell>
+            </Table.Row>
+          ))}
         </Table.Body>
-    
+
         <Table.Footer fullWidth>
           <Table.Row>
             <Table.HeaderCell />
-            <Table.HeaderCell colSpan='4'>
+            <Table.HeaderCell colSpan="4">
               <Button
-                floated='right'
+                floated="right"
                 icon
-                labelPosition='left'
+                labelPosition="left"
                 primary
-                size='small'
+                size="small"
               >
-                <Icon name='user' /> Add User
-              </Button>
-              <Button size='small'>Approve</Button>
-              <Button disabled size='small'>
-                Approve All
+                <Icon name="user" /> Add User
               </Button>
             </Table.HeaderCell>
           </Table.Row>
         </Table.Footer>
       </Table>
-    )
-}
+    </Fragment>
+  );
+};
 
-export default UserList;
+export default observer(UserList);

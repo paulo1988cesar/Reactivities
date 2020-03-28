@@ -1,5 +1,6 @@
 import axios, { AxiosResponse } from 'axios';
 import { IActivity }  from '../models/activity';
+import { IUser } from '../models/user';
 import { history } from '../..';
 import { toast } from 'react-toastify';
 
@@ -23,11 +24,11 @@ axios.interceptors.response.use(undefined, error => {
         history.push('/NotFound');
     }
 
-    if(status === 500) {
-        toast.error('Server error - check the terminal for more info!');
-    }
+    // if(status === 500) {
+    //     toast.error('Server error - check the terminal for more info!');
+    // }
 
-    throw error;
+    // throw error;
 })
 
 const sleep = (ms: number) => (response: AxiosResponse) => 
@@ -48,6 +49,10 @@ const Activities = {
     delete: (id: string) => requests.del(`/activities/${id}`)
 }
 
+const Users = {
+    list: (): Promise<IUser[]> => requests.get('/user')
+}
+
 export default {
-    Activities
+    Activities, Users
 }

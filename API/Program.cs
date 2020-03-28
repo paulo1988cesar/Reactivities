@@ -9,6 +9,8 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Persistence;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
+using Domain;
 
 namespace API
 {
@@ -26,9 +28,10 @@ namespace API
                 {
                     //Pega o contexto onde estão as classes para criar as tabelas
                     var context = services.GetRequiredService<DataContext>();
+                    var userManager = services.GetRequiredService<UserManager<AppUser>>();
                     //Roda o comando para criar a base, caso não exista
                     context.Database.Migrate();
-                    Seed.SeedData(context);
+                    Seed.SeedData(context, userManager).Wait();
                 }
                 catch (Exception ex)
                 {
