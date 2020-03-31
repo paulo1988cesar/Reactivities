@@ -1,5 +1,5 @@
 import React, { Fragment } from "react";
-import { Input, Form, Button, Checkbox } from "semantic-ui-react";
+import { Form, Button, Checkbox } from "semantic-ui-react";
 
 const UserFilter = () => {
   return (

@@ -1,19 +1,21 @@
 import React, { useContext, useEffect } from "react";
 import { Grid } from "semantic-ui-react";
 import UserList from "./UserList";
-import userStore from "../../../app/stores/userStore";
 import LoadingComponent from "../../../app/layout/LoadingComponent";
 import UserFilter from './UserFilter';
 import { observer } from "mobx-react-lite";
+import { RootStoreContext } from "../../../app/stores/rootStore";
 
 const UserDashboard: React.FC = () => {
-  const usersStore = useContext(userStore);
+  
+  const rootStore = useContext(RootStoreContext);
+  const { loadUsers, loadingInitial } = rootStore.userStore;
 
   useEffect(() => {
-    usersStore.loadUsers();
-  }, [usersStore]);
+    loadUsers();
+  }, [loadUsers]);
 
-  if (usersStore.loadingInitial)
+  if (loadingInitial)
     return <LoadingComponent content="Loading data..." />;
 
   return (

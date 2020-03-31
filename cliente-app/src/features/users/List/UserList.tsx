@@ -1,19 +1,20 @@
-import React, { Fragment, useContext, useEffect } from "react";
-import { Table, Checkbox, Button, Icon, Card, Image } from "semantic-ui-react";
+import React, { Fragment, useContext } from "react";
+import { Table, Checkbox, Button, Icon } from "semantic-ui-react";
 import { toast } from "react-toastify";
 import { observer } from "mobx-react-lite";
-import userStore from "../../../app/stores/userStore";
 import LoadingComponent from "../../../app/layout/LoadingComponent";
+import { RootStoreContext } from "../../../app/stores/rootStore";
 
 const ativarDesativarUsuario = () => {
   toast.success("Usuário desativado com sucesso.");
 };
 
 const UserList: React.FC = () => {
-  const usersStore = useContext(userStore);
-  const { userLists } = usersStore;
 
-  if (usersStore.loadingInitial)
+  const rootStore = useContext(RootStoreContext);
+  const { loadingInitial, userLists } = rootStore.userStore;
+  
+  if (loadingInitial)
     return <LoadingComponent content="Loading data..." />;
 
   return (
