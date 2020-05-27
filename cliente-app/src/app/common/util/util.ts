@@ -29,7 +29,7 @@ export const createAtendee = (user: IUser): IAttendee => {
   return {
     displayName: user.displayName,
     isHost: false,
-    userName: user.username!,
+    userName: user.userName!,
     image: user.image!,
   };
 };

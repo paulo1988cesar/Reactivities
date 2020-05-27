@@ -4,6 +4,7 @@ import { toast } from "react-toastify";
 import { observer } from "mobx-react-lite";
 import LoadingComponent from "../../../app/layout/LoadingComponent";
 import { RootStoreContext } from "../../../app/stores/rootStore";
+import { Link } from "react-router-dom";
 
 const ativarDesativarUsuario = () => {
   toast.success("Usuário desativado com sucesso.");
@@ -37,7 +38,7 @@ const UserList: React.FC = () => {
                 <Checkbox slider onClick={ativarDesativarUsuario} />
               </Table.Cell>
               <Table.Cell>{user.displayName}</Table.Cell>
-              <Table.Cell>{user.username}</Table.Cell>
+              <Table.Cell><Link to={`/profile/${user.username}`}>{user.username}</Link></Table.Cell>
               <Table.Cell>{user.email}</Table.Cell>
               <Table.Cell>{user.status}</Table.Cell>
             </Table.Row>

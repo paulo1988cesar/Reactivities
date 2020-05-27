@@ -24,16 +24,20 @@ namespace Application.Profiles
 
             public async Task<Profile> Handle(Query request, CancellationToken cancellationToken)
             {
-                var user = await _context.Users.SingleOrDefaultAsync(c=> c.UserName == request.Username);
+                var user = await _context.Users.SingleOrDefaultAsync(c => c.UserName == request.Username);
 
-                return new Profile 
+                Profile profile = new Profile();
+
+                if (user != null)
                 {
-                    DisplayName = user.DisplayName,
-                    Username = user.UserName,
-                    Image = user.Photos.FirstOrDefault(c=> c.IsMain)?.Url,
-                    Photos = user.Photos,
-                    Bio = user.Bio
-                };
+                    profile.DisplayName = user.DisplayName;
+                    profile.Username = user.UserName;
+                    profile.Image = user.Photos.FirstOrDefault(c => c.IsMain)?.Url;
+                    profile.Photos = user.Photos;
+                    profile.Bio = user.Bio;
+                }
+
+                return profile;
             }
         }
     }

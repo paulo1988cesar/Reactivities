@@ -49,7 +49,7 @@ const ActivityDetailedHeader: React.FC<{ activity: IActivity }> = ({
                   <Moment format="DD/MM/YYYY">{activity.date}</Moment>
                 </p>
                 <p>
-                  Hosted by <strong> {host.displayName} </strong>
+                  Hosted by <Link to={`/profile/${host.displayName}`}> <strong> {host.displayName} </strong></Link>
                 </p>
               </Item.Content>
             </Item>
