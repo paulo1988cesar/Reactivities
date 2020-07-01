@@ -16,28 +16,15 @@ namespace Application.Profiles
 
         public class Handler : IRequestHandler<Query, Profile>
         {
-            private readonly DataContext _context;
-            public Handler(DataContext context)
+            public IProfileReader _ProfileReader { get; set; }
+            public Handler(IProfileReader profileReader)
             {
-                _context = context;
+                _ProfileReader = profileReader;
             }
 
             public async Task<Profile> Handle(Query request, CancellationToken cancellationToken)
             {
-                var user = await _context.Users.SingleOrDefaultAsync(c => c.UserName == request.Username);
-
-                Profile profile = new Profile();
-
-                if (user != null)
-                {
-                    profile.DisplayName = user.DisplayName;
-                    profile.Username = user.UserName;
-                    profile.Image = user.Photos.FirstOrDefault(c => c.IsMain)?.Url;
-                    profile.Photos = user.Photos;
-                    profile.Bio = user.Bio;
-                }
-
-                return profile;
+                return await _ProfileReader.ReadProfile(request.Username);
             }
         }
     }
