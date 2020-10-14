@@ -11,10 +11,10 @@ namespace Persistence.Migrations
                 name: "Comments",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(nullable: false),
-                    Body = table.Column<string>(nullable: true),
-                    AuthorId = table.Column<string>(nullable: true),
-                    ActivityId = table.Column<Guid>(nullable: true),
+                    Id = table.Column<Guid>(nullable: false, maxLength: 200),
+                    Body = table.Column<string>(nullable: true, maxLength: 200),
+                    AuthorId = table.Column<string>(nullable: true, maxLength: 200),
+                    ActivityId = table.Column<Guid>(nullable: true, maxLength: 200),
                     CreatedAt = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>

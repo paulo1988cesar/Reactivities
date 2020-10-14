@@ -29,11 +29,14 @@ namespace Infrastructure.Security
 
             var cred = new SigningCredentials(_key, SecurityAlgorithms.HmacSha512Signature);
 
+            DateTime agora = DateTime.UtcNow.AddDays(3);
+            Console.Write(agora.ToString());
             var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(claimns),
-                Expires = DateTime.Now.AddDays(7),
-                SigningCredentials = cred
+                Expires = agora,
+                SigningCredentials = cred,
+                NotBefore = DateTime.UtcNow
             };
 
             var tokenHandler = new JwtSecurityTokenHandler();

@@ -31,7 +31,7 @@ namespace Persistence.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<DateTime>("Date")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("Date");
 
                     b.Property<string>("Description")
                         .HasColumnType("TEXT");

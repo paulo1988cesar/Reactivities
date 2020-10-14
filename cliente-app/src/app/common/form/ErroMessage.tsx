@@ -13,8 +13,8 @@ const ErroMessage: React.FC<IProps> = ({ error, text}) => {
             <Message.Header>{error.statusText}</Message.Header>
             {error.data && Object.keys(error.data.errors).length > 0 && (
                 <Message.List>
-                    {Object.values(error.data.errors).flat().map((err, i) => (
-                        <Message.Item key={i}>{err}</Message.Item>
+                    {Object.values(error.data.errors).flat().map((erro: any, i) => (
+                        <Message.Item key={i}>{erro}</Message.Item>
                     ))}
                 </Message.List>
             )}

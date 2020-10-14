@@ -15,10 +15,10 @@ namespace Persistence.Migrations
                 name: "Photos",
                 columns: table => new
                 {
-                    Id = table.Column<string>(nullable: false),
-                    Url = table.Column<string>(nullable: true),
+                    Id = table.Column<string>(nullable: false, maxLength: 200),
+                    Url = table.Column<string>(nullable: true, maxLength: 200),
                     IsMain = table.Column<bool>(nullable: false),
-                    AppUserId = table.Column<string>(nullable: true)
+                    AppUserId = table.Column<string>(nullable: true, maxLength: 200)
                 },
                 constraints: table =>
                 {

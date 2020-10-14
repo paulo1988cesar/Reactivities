@@ -61,7 +61,7 @@ namespace Application.Activities
 
                 _context.Activities.Add(activity);
 
-                var user = await _context.Users.SingleOrDefaultAsync(c=> c.UserName.Equals(_userAccessor.GetCurrentUsername()));
+                var user = await _context.Users.SingleOrDefaultAsync(c => c.UserName.Equals(_userAccessor.GetCurrentUsername()));
 
                 var attendee = new UserActivity
                 {
@@ -72,7 +72,7 @@ namespace Application.Activities
                 };
 
                 _context.UserActivities.Add(attendee);
-                
+
                 var success = await _context.SaveChangesAsync() > 0;
 
                 if (success) return Unit.Value;
